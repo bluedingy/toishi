@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bbqifg8s7bnfn"]
+
+[ext_resource type="PackedScene" uid="uid://cobrmfjg8saqt" path="res://game/scenes/common/test_hitbox2.tscn" id="1_5a37f"]
+
+[node name="test_hitbox" type="Node3D" unique_id=997436397]
+
+[node name="Area3D" parent="." unique_id=2069979855 instance=ExtResource("1_5a37f")]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://db0sg5rxp42u7"]
+
+[ext_resource type="Script" uid="uid://bkxevmhaxjwk8" path="res://game/entities/player/character_stats.gd" id="1_n6gq1"]
+
+[resource]
+script = ExtResource("1_n6gq1")
+walk_speed = 10.0
+dash_speed = 40.0
+dash_duration = 10
+air_speed = 8.0
+air_acceleration = 50.0
+jump_velocity = 25.0
+double_jump_velocity = 20.0
+gravity = 50.0
+max_fall_speed = -900.0
+metadata/_custom_type_script = "uid://bkxevmhaxjwk8"

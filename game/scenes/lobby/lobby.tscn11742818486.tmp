@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cl7tob4eopsvl"]
+
+[ext_resource type="Script" uid="uid://onadn1khyf40" path="res://game/entities/player/player.gd" id="1_k6xle"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eij7j"]
+
+[sub_resource type="Sky" id="Sky_k6xle"]
+sky_material = SubResource("ProceduralSkyMaterial_eij7j")
+
+[sub_resource type="Environment" id="Environment_cep5k"]
+background_mode = 2
+sky = SubResource("Sky_k6xle")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eij7j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k6xle"]
+
+[node name="main" type="Node3D" unique_id=733797554]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=326572389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.3412867, 6.3176155)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1082550328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 9.57643)
+projection = 1
+size = 15.0
+
+[node name="floor" type="CSGBox3D" parent="." unique_id=1068844027]
+transform = Transform3D(15, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 3.33, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1335638604]
+environment = SubResource("Environment_cep5k")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1711222383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7403355, 0)
+script = ExtResource("1_k6xle")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=700282434]
+mesh = SubResource("CapsuleMesh_eij7j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1462541904]
+shape = SubResource("CapsuleShape3D_k6xle")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1654265566]

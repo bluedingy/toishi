@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://chd0snivdin36"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yxbma"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cep5k"]
+albedo_color = Color(0.31, 0.25430334, 0.1581, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_471q1"]
+
+[node name="arrow" type="RigidBody3D" unique_id=406363443]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=322070747]
+transform = Transform3D(0.254, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_yxbma")
+surface_material_override/0 = SubResource("StandardMaterial3D_cep5k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1548992564]
+transform = Transform3D(0.25, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_471q1")

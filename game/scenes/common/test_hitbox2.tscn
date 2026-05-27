@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cobrmfjg8saqt"]
+
+[ext_resource type="Script" uid="uid://bqvu8ky77dvnn" path="res://game/entities/scripts/hitbox.gd" id="1_uh2yp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cep5k"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cep5k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cep5k"]
+albedo_color = Color(0.5568628, 0.36078432, 1, 0.4627451)
+
+[node name="Area3D" type="Area3D" unique_id=2069979855]
+script = ExtResource("1_uh2yp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1895845929]
+shape = SubResource("SphereShape3D_cep5k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=31321607]
+mesh = SubResource("SphereMesh_cep5k")
+surface_material_override/0 = SubResource("StandardMaterial3D_cep5k")
