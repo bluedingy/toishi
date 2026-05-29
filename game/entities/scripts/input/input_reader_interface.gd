@@ -11,3 +11,7 @@ func poll() -> void:
 
 func get_move_direction() -> int:
 	return 0
+	
+func get_look_direction() -> Vector3:
+	return Vector3(0,0,0)
+	

@@ -78,3 +78,4 @@ func get_move_angle() -> float:
 	
 	var angle = atan2(h_input, v_input)
 	return angle
+	

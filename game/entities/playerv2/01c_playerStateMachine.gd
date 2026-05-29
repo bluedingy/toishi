@@ -1,4 +1,4 @@
-class_name CharacterStateMachine
+class_name PlayerStateMachine
 extends Node
 
 ## Hierarchical state machine for the character controller.
@@ -8,7 +8,7 @@ extends Node
 signal state_changed(from: StringName, to: StringName)
 
 var _states: Dictionary = {}
-var _current_state: CharacterState = null
+var _current_state: PlayerState = null
 var _current_state_name: StringName = &""
 
 var character: CharacterBody3D
@@ -21,7 +21,7 @@ func _init(p_character: CharacterBody3D, p_input: InputReaderInterface) -> void:
 
 
 ## Register all states before calling start().
-func register_state(state_name: StringName, state: CharacterState) -> void:
+func register_state(state_name: StringName, state: PlayerState) -> void:
 	state.setup(character, input)
 	_states[state_name] = state
 
@@ -44,7 +44,7 @@ func get_current_state_name() -> StringName:
 	return _current_state_name
 
 
-func get_current_state() -> CharacterState:
+func get_current_state() -> PlayerState:
 	return _current_state
 
 
@@ -53,10 +53,9 @@ func force_transition(state_name: StringName) -> void:
 	_transition_to(state_name, _current_state)
 
 
-func _transition_to(state_name: StringName, prev: CharacterState) -> void:
-	#print(state_name)
+func _transition_to(state_name: StringName, prev: PlayerState) -> void:
 	if not _states.has(state_name):
-		push_error("CharacterStateMachine: unknown state '%s'" % state_name)
+		push_error("PlayerStateMachine: unknown state '%s'" % state_name)
 		return
 
 	if _current_state != null:

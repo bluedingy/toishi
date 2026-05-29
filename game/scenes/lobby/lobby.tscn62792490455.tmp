@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://onadn1khyf40" path="res://game/entities/player/player.gd" id="1_k6xle"]
 [ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/player/base_stats.tres" id="2_cep5k"]
-[ext_resource type="Script" uid="uid://cpugdvomq82pp" path="res://game/entities/playerv2/01c_playerController.gd" id="4_kt22x"]
+[ext_resource type="Script" uid="uid://cpugdvomq82pp" path="res://game/entities/playerv2/01_playerController.gd" id="4_kt22x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eij7j"]
 
@@ -68,6 +68,7 @@ environment = SubResource("Environment_cep5k")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1711222383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7735443, 0)
 script = ExtResource("1_k6xle")
+player_index = null
 base_stats = ExtResource("2_cep5k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=700282434]

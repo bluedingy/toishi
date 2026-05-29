@@ -68,6 +68,7 @@ environment = SubResource("Environment_cep5k")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1711222383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7735443, 0)
 script = ExtResource("1_k6xle")
+player_index = null
 base_stats = ExtResource("2_cep5k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=700282434]
