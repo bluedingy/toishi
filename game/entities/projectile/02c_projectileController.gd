@@ -1,4 +1,4 @@
-class_name PlayerController
+class_name ProjectileController
 extends CharacterBody3D
 
 ## Root character controller for the robot boxer.
@@ -6,68 +6,42 @@ extends CharacterBody3D
 ## Exposes public state flags read by states and the hurtbox receiver.
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-@export var player_index: int = 0
+@export var source_player_index: int = 0
 @export var base_stats: CharacterStats
 
 # ── Runtime Stats (modified by upgrades) ─────────────────────────────────────
 var stats: CharacterStats
 
 # ── Subsystems ────────────────────────────────────────────────────────────────
-var state_machine: PlayerStateMachine
-var movement_machine: PlayerStateMachine
-var input_reader: LocalInputReader
+var state_machine: ProjectileStateMachine
 
-# ── Public State Flags (read by states and hurtbox) ──────────────────────────
-var facing: int = 1               # 1 = right, -1 = left
+# ── Public State Flags (read by states and hurtbox) ──────────────────────────-
 var look_dir: Vector3 = Vector3(1,0,0)
-var health: float = 100.0
-var is_blocking: bool = false
-var is_in_parry_window: bool = false
-var is_invincible: bool = false   # i-frames during slip
-
-var jumps_remaining: int = 2
-var dash_cooldown_remaining: int = 0
-var rocket_cooldown_remaining: int = 0
-
-# ── References ────────────────────────────────────────────────────────────────
-var opponent: Node3D = null       # set by GameManager each round
+var damage: float = 55.0
+var speed: float = 100
 
 # ── Signals ──────────────────────────────────────────────────────────────────
-signal health_changed(new_health: float, max_health: float)
-signal died()
 
 
 func _ready() -> void:
-	assert(base_stats != null, "PlayerController requires a CharacterStats resource.")
+	
+	assert(base_stats != null, "RobotBoxer requires a CharacterStats resource.")
 
 	# Deep copy so upgrades don't mutate the base resource
 	stats = base_stats.duplicate_stats()
-	health = stats.max_health
-
-	# Input
-	input_reader = LocalInputReader.new(player_index)
 
 	# State machine
-	state_machine = PlayerStateMachine.new(self, input_reader)
-	movement_machine = PlayerStateMachine.new(self, input_reader)
+	state_machine = ProjectileStateMachine.new(self)
 	_register_states()
-	state_machine.start(&"IdleState")
-	movement_machine.start(&"GroundedState")
+	state_machine.start(&"FlyState")
 
 
 func _physics_process(delta: float) -> void:
-	input_reader.poll()
-
-	# Tick cooldowns
-	if dash_cooldown_remaining > 0:
-		dash_cooldown_remaining -= 1
-	if rocket_cooldown_remaining > 0:
-		rocket_cooldown_remaining -= 1
 		
 	look_dir = get_mouse_look_direction()
+		
 	# Update state machine
 	state_machine.update(delta)
-	movement_machine.update(delta)
 
 	# Apply movement
 	move_and_slide()
@@ -77,12 +51,14 @@ func _physics_process(delta: float) -> void:
 # ── State Registration ────────────────────────────────────────────────────────
 
 func _register_states() -> void:
-	state_machine.register_state(&"IdleState",          PlayerIdleState.new())
-	state_machine.register_state(&"ShootState",           PlayerShootState.new())
-	
-	movement_machine.register_state(&"GroundedState",     PlayerGroundedState.new())
-	movement_machine.register_state(&"JumpState",         PlayerJumpState.new())
-	movement_machine.register_state(&"AirState",          PlayerAirState.new())
+	#state_machine.register_state(&"IdleState",         ProjectileIdleState.new())
+	#state_machine.register_state(&"ShootState",          ProjectileAimingState.new())
+	state_machine.register_state(&"FlyState",         ProjectileFlyingState.new())
+	#state_machine.register_state(&"HitState",         ProjectileHittingState.new())
+	#state_machine.register_state(&"ClashState",         ProjectileClashingState.new())
+	#state_machine.register_state(&"LandState",         ProjectileLandingState.new())
+	#state_machine.register_state(&"IdleState",         ProjectileIdleState.new())
+	#state_machine.register_state(&"PickupState",         ProjectilePickupState.new())
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
@@ -90,33 +66,19 @@ func _register_states() -> void:
 
 ## Reset to base state for a new round (keeps upgrades, resets health/poise).
 func reset_for_round() -> void:
-	health = stats.max_health
 	velocity = Vector3.ZERO
-	is_blocking = false
-	is_in_parry_window = false
-	is_invincible = false
-	jumps_remaining = 1
-	dash_cooldown_remaining = 0
-	rocket_cooldown_remaining = 0
 	state_machine.force_transition(&"IdleState")
-	health_changed.emit(health, stats.max_health)
 	
 
 
 
 # ── Private Callbacks ─────────────────────────────────────────────────────────
 
-func _on_hit_received(_hit_data) -> void:
-	health_changed.emit(health, stats.max_health)
-	if health <= 0.0:
-		died.emit()
-		
-
 func get_mouse_look_direction() -> Vector3:
 	var mouse_pos = get_mouse_world_position()
-	DebugDraw3D.draw_line(global_position, mouse_pos, Color.RED)
+	#DebugDraw3D.draw_line(global_position, mouse_pos, Color.RED)
 	var look_vector = global_position - mouse_pos
-	var look_unit_vector = look_vector.normalized().rotated(Vector3.FORWARD, PI)
+	var look_unit_vector = look_vector.normalized()
 	return look_unit_vector
 	
 func get_controller_look_direction() -> Vector3:

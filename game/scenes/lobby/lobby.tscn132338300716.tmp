@@ -404,6 +404,7 @@ mesh = SubResource("SphereMesh_kbgqp")
 [node name="playerv2" type="CharacterBody3D" parent="." unique_id=843760617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1112814, 16.526, 0)
 script = ExtResource("4_kt22x")
+player_index = null
 base_stats = ExtResource("2_cep5k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="playerv2" unique_id=962229996]

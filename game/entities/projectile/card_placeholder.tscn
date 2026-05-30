@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://1u7bxnyqfhk6"]
+
+[ext_resource type="Script" uid="uid://uarfktslsmv7" path="res://game/entities/projectile/02c_projectileController.gd" id="1_fwcqr"]
+[ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/player/base_stats.tres" id="2_fwhti"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l8n7w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kt22x"]
+albedo_color = Color(0.52156866, 0.11372549, 0.2, 1)
+metallic = 0.35
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2cbfa"]
+
+[node name="card_placeholder" type="CharacterBody3D" unique_id=207936741]
+script = ExtResource("1_fwcqr")
+base_stats = ExtResource("2_fwhti")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1893225261]
+transform = Transform3D(0.75, 0, 0, 0, 1.296, 0, 0, 0, 0.069, 0, 0, 0)
+mesh = SubResource("BoxMesh_l8n7w")
+surface_material_override/0 = SubResource("StandardMaterial3D_kt22x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=351950068]
+transform = Transform3D(0.75, 0, 0, 0, 1.25, 0, 0, 0, 0.125, 0, 0, 0)
+shape = SubResource("BoxShape3D_2cbfa")
