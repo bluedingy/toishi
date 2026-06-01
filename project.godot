@@ -80,6 +80,10 @@ block={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Floor"
+
 [physics]
 
 3d/physics_engine="Rapier3D"

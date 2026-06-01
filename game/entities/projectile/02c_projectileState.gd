@@ -15,7 +15,6 @@ var frame: int = 0
 func setup(p_projectile: CharacterBody3D) -> void:
 	projectile = p_projectile
 	stats = p_projectile.stats
-	print(stats)
 
 
 ## Called when entering this state. prev_state may be null.
@@ -28,7 +27,6 @@ func enter(_prev_state: ProjectileState) -> void:
 func physics_update(_delta: float) -> StringName:
 	frame += 1
 	projectile.global_position.z=0
-	apply_gravity(_delta)
 	return &""
 
 

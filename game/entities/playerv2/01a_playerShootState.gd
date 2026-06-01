@@ -11,7 +11,6 @@ func enter(prev: PlayerState) -> void:
 	super(prev)
 	_aerial = not is_on_floor()
 	character.velocity.x=0.0
-	print('Winding Up...')
 
 func physics_update(delta: float) -> StringName:
 	super(delta)
@@ -19,9 +18,8 @@ func physics_update(delta: float) -> StringName:
 	if _aerial:
 		apply_gravity(delta)
 
-	var startup := stats.punch_startup
-	var active  := stats.punch_active
-	var recovery := stats.punch_recovery
+	var startup := 1
+	var recovery := 1
 	
 	var arrow = preload('res://game/entities/projectile/card_placeholder.tscn')
 
@@ -39,11 +37,9 @@ func physics_update(delta: float) -> StringName:
 		
 
 	# Active → recovery
-	if frame == startup + active:
-		print('Recovering...')
 
 	# Recovery complete
-	if frame >= startup + active + recovery:
+	if frame >= startup + recovery:
 		return &"IdleState"
 
 	return &""

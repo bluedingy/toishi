@@ -12,7 +12,9 @@ metallic = 0.35
 [sub_resource type="BoxShape3D" id="BoxShape3D_2cbfa"]
 
 [node name="card_placeholder" type="CharacterBody3D" unique_id=207936741]
+collision_layer = 2
 script = ExtResource("1_fwcqr")
+source_player_index = null
 base_stats = ExtResource("2_fwhti")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1893225261]

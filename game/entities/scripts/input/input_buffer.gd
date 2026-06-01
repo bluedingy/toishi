@@ -46,7 +46,6 @@ func update(raw_held: Dictionary) -> void:
 		if _buffer[i].frames_remaining <= 0:
 			_buffer.remove_at(i)
 		i -= 1
-		#print(_buffer)
 
 	# Register newly pressed inputs (rising edge)
 	for action in raw_held:

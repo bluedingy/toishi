@@ -13,6 +13,7 @@ extends CharacterBody3D
 var stats: CharacterStats
 
 # ── Subsystems ────────────────────────────────────────────────────────────────
+var health_component: HealthComponent
 var state_machine: PlayerStateMachine
 var movement_machine: PlayerStateMachine
 var input_reader: LocalInputReader
@@ -20,11 +21,11 @@ var input_reader: LocalInputReader
 # ── Public State Flags (read by states and hurtbox) ──────────────────────────
 var facing: int = 1               # 1 = right, -1 = left
 var look_dir: Vector3 = Vector3(1,0,0)
-var health: float = 100.0
 var is_blocking: bool = false
 var is_in_parry_window: bool = false
 var is_invincible: bool = false   # i-frames during slip
 
+var lives = 3
 var jumps_remaining: int = 2
 var dash_cooldown_remaining: int = 0
 var rocket_cooldown_remaining: int = 0
@@ -42,7 +43,10 @@ func _ready() -> void:
 
 	# Deep copy so upgrades don't mutate the base resource
 	stats = base_stats.duplicate_stats()
-	health = stats.max_health
+	
+	health_component = $HealthComponent
+	health_component.initialize(stats.max_health*5, stats.max_health)
+	health_component.health_depleted.connect(_on_health_component_died)
 
 	# Input
 	input_reader = LocalInputReader.new(player_index)
@@ -61,8 +65,6 @@ func _physics_process(delta: float) -> void:
 	# Tick cooldowns
 	if dash_cooldown_remaining > 0:
 		dash_cooldown_remaining -= 1
-	if rocket_cooldown_remaining > 0:
-		rocket_cooldown_remaining -= 1
 		
 	look_dir = get_mouse_look_direction()
 	# Update state machine
@@ -77,8 +79,9 @@ func _physics_process(delta: float) -> void:
 # ── State Registration ────────────────────────────────────────────────────────
 
 func _register_states() -> void:
-	state_machine.register_state(&"IdleState",          PlayerIdleState.new())
+	state_machine.register_state(&"IdleState",            PlayerIdleState.new())
 	state_machine.register_state(&"ShootState",           PlayerShootState.new())
+	state_machine.register_state(&"DamageState",          PlayerDamageState.new())
 	
 	movement_machine.register_state(&"GroundedState",     PlayerGroundedState.new())
 	movement_machine.register_state(&"JumpState",         PlayerJumpState.new())
@@ -90,16 +93,13 @@ func _register_states() -> void:
 
 ## Reset to base state for a new round (keeps upgrades, resets health/poise).
 func reset_for_round() -> void:
-	health = stats.max_health
 	velocity = Vector3.ZERO
 	is_blocking = false
 	is_in_parry_window = false
 	is_invincible = false
 	jumps_remaining = 1
 	dash_cooldown_remaining = 0
-	rocket_cooldown_remaining = 0
 	state_machine.force_transition(&"IdleState")
-	health_changed.emit(health, stats.max_health)
 	
 
 
@@ -107,8 +107,6 @@ func reset_for_round() -> void:
 # ── Private Callbacks ─────────────────────────────────────────────────────────
 
 func _on_hit_received(_hit_data) -> void:
-	health_changed.emit(health, stats.max_health)
-	if health <= 0.0:
 		died.emit()
 		
 
@@ -152,5 +150,15 @@ func get_mouse_vector() -> Vector3:
 	# Vector from character to mouse
 	var vec = mouse_world - global_position
 	return vec
+	
+
+func _on_health_component_died():
+	print("The parent received the death signal!")
+	
+	if lives <= 0:
+		queue_free() # Removes the parent from the game
+	else: 
+		lives -= 1
+		health_component.initialize(stats.max_health*5, stats.max_health)
 
 		

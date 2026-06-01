@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://cl7tob4eopsvl"]
 
 [ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/player/base_stats.tres" id="2_cep5k"]
-[ext_resource type="Script" uid="uid://dude0s11b0lte" path="res://game/entities/npc/00_healthComponent.gd" id="3_l8n7w"]
-[ext_resource type="Script" uid="uid://olh85t56m8o0" path="res://game/entities/npc/03c_BotController.gd" id="4_2cbfa"]
 [ext_resource type="Script" uid="uid://cpugdvomq82pp" path="res://game/entities/playerv2/01c_playerController.gd" id="4_kt22x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eij7j"]
@@ -51,14 +49,6 @@ sky = SubResource("Sky_k6xle")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_eij7j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k6xle"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_cep5k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8n7w"]
-albedo_color = Color(0.946, 1, 0.19, 1)
-roughness = 0.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_cep5k"]
 
 [node name="main" type="Node3D" unique_id=733797554]
 
@@ -422,9 +412,6 @@ mesh = SubResource("CapsuleMesh_eij7j")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="playerv2" unique_id=935609514]
 shape = SubResource("CapsuleShape3D_k6xle")
 
-[node name="HealthComponent" type="Node" parent="playerv2" unique_id=1782332966]
-script = ExtResource("3_l8n7w")
-
 [node name="level_origin" type="Node3D" parent="." unique_id=155351065]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.449123, 16.564613)
 
@@ -447,18 +434,3 @@ size = Vector3(5, 0.5, 5)
 transform = Transform3D(0.125, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.779123, -16.564613)
 use_collision = true
 size = Vector3(500, 0.5, 5)
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=831610505]
-script = ExtResource("4_2cbfa")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=514723453]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.132618, 6.2244606, 0)
-mesh = SubResource("CylinderMesh_cep5k")
-surface_material_override/0 = SubResource("StandardMaterial3D_l8n7w")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=368500615]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.132618, 6.2244606, 0)
-shape = SubResource("CylinderShape3D_cep5k")
-
-[node name="HealthComponent" type="Node" parent="CharacterBody3D" unique_id=1616402095]
-script = ExtResource("3_l8n7w")
