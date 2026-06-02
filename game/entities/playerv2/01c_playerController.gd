@@ -39,6 +39,8 @@ signal died()
 
 
 func _ready() -> void:
+	
+	add_to_group("Entities")
 	assert(base_stats != null, "PlayerController requires a CharacterStats resource.")
 
 	# Deep copy so upgrades don't mutate the base resource

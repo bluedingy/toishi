@@ -8,6 +8,7 @@ extends CharacterBody3D
 # ── Configuration ─────────────────────────────────────────────────────────────
 @export var source_player_index: int = 0
 @export var base_stats: CharacterStats
+@export var destination_player_reference: CharacterBody3D
 
 # ── Runtime Stats (modified by upgrades) ─────────────────────────────────────
 var stats: CharacterStats
@@ -19,7 +20,6 @@ var state_machine: ProjectileStateMachine
 var look_dir: Vector3 = Vector3(1,0,0)
 var damage: float = 55.0
 var speed: float = 100
-
 # ── Signals ──────────────────────────────────────────────────────────────────
 
 
