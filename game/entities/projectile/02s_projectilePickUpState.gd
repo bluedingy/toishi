@@ -1,6 +1,11 @@
 class_name ProjectilePickUpState
 extends ProjectileState
 
+
+
+var acceleration = 0.5
+var speed = 5
+
 func enter(prev: ProjectileState) -> void:
 	super(prev)
 	print("Im being picked up")
@@ -15,7 +20,8 @@ func physics_update(delta: float) -> StringName:
 		print("I just picked up a card")
 		projectile.destination_player_reference.current_hand_size += 1
 		projectile.queue_free()
-	projectile.global_position = proj_pos.move_toward(target_pos, 10 * delta)
+	projectile.global_position = proj_pos.move_toward(target_pos, speed * delta)
+	speed += acceleration
 	DebugDraw3D.draw_line(projectile.global_position,projectile.destination_player_reference.global_position, Color.GREEN)
 	
 	
