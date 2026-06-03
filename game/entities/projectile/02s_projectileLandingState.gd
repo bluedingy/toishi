@@ -19,16 +19,15 @@ func enter(prev: ProjectileState) -> void:
 func physics_update(delta: float) -> StringName:
 	super(delta)
 	if projectile.destination_player_reference:
-		DebugDraw3D.draw_line(projectile.global_position,projectile.destination_player_reference.global_position, Color.GREEN)
+		return &"PickUpState"
 	return &""
-	
+
+func exit() -> void:
+	projectile.remove_child(pickup_area)
+
 func _on_pickup_body_entered(body: Node3D) -> StringName:
-	# Since we isolated the collision mask to only see the player, 
-	# we don't even strictly need the group check, but it's safe to keep!
-	print("Something Entered...")
-	if body.is_in_group("Entities"):
+	if body.is_in_group("Entities") and projectile.destination_player_reference == null:
 		print('Its an Entity!')
 		projectile.destination_player_reference = body
-		return &""
-	
+		return &"PickUpState"
 	return &""

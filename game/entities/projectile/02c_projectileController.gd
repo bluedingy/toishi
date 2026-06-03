@@ -56,7 +56,7 @@ func _register_states() -> void:
 	#state_machine.register_state(&"ClashState",         ProjectileClashingState.new())
 	state_machine.register_state(&"LandState",         ProjectileLandingState.new())
 	#state_machine.register_state(&"IdleState",         ProjectileIdleState.new())
-	#state_machine.register_state(&"PickupState",         ProjectilePickupState.new())
+	state_machine.register_state(&"PickUpState",         ProjectilePickUpState.new())
 
 
 # ── Public API ────────────────────────────────────────────────────────────────

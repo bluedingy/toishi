@@ -21,7 +21,8 @@ func physics_update(delta: float) -> StringName:
 		return &"SprintState"
 
 	if input.buffer.consume(InputBuffer.Action.ATTACK):
-		return &"ShootState"
+		if character.current_hand_size > 0:
+			return &"ShootState"
 
 	if input.buffer.is_held(InputBuffer.Action.ATTACK_HOLD):
 		return &"AimState"

@@ -27,8 +27,10 @@ var is_invincible: bool = false   # i-frames during slip
 
 var lives = 3
 var jumps_remaining: int = 2
+var max_hand_size = 10
+var current_hand_size = 10
 var dash_cooldown_remaining: int = 0
-var rocket_cooldown_remaining: int = 0
+
 
 # ── References ────────────────────────────────────────────────────────────────
 var opponent: Node3D = null       # set by GameManager each round
@@ -162,5 +164,6 @@ func _on_health_component_died():
 	else: 
 		lives -= 1
 		health_component.initialize(stats.max_health*5, stats.max_health)
+		
 
 		
