@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cl7tob4eopsvl"]
 
-[ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/player/base_stats.tres" id="2_cep5k"]
-[ext_resource type="Script" uid="uid://dude0s11b0lte" path="res://game/entities/npc/00_healthComponent.gd" id="3_l8n7w"]
-[ext_resource type="Script" uid="uid://olh85t56m8o0" path="res://game/entities/npc/03c_BotController.gd" id="4_2cbfa"]
-[ext_resource type="Script" uid="uid://cpugdvomq82pp" path="res://game/entities/playerv2/01c_playerController.gd" id="4_kt22x"]
+[ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/characters/player/base_stats.tres" id="2_cep5k"]
+[ext_resource type="Script" uid="uid://dude0s11b0lte" path="res://game/entities/characters/npc/00_healthComponent.gd" id="3_l8n7w"]
+[ext_resource type="Script" uid="uid://olh85t56m8o0" path="res://game/entities/characters/npc/03c_BotController.gd" id="4_2cbfa"]
+[ext_resource type="Script" uid="uid://cpugdvomq82pp" path="res://game/entities/characters/playerv2/01c_playerController.gd" id="4_kt22x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eij7j"]
 

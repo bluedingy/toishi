@@ -17,7 +17,7 @@ func physics_update(delta: float) -> StringName:
 	var proj_pos = projectile.global_position
 	var target_pos = projectile.destination_player_reference.global_position
 	if proj_pos.distance_to(target_pos)<1:
-		print("I just picked up a card")
+		print("Im picked up")
 		projectile.destination_player_reference.current_hand_size += 1
 		projectile.queue_free()
 	projectile.global_position = proj_pos.move_toward(target_pos, speed * delta)

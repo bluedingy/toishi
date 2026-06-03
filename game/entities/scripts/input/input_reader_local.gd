@@ -34,7 +34,7 @@ func _build_action_map(p_index: int) -> void:
 		InputBuffer.Action.ATTACK_HOLD: prefix + "attack",   # same button, held state checked separately
 		InputBuffer.Action.SPECIAL:      prefix + "special",
 		InputBuffer.Action.SPECIAL_HOLD: prefix + "special",
-		InputBuffer.Action.BLOCK:       prefix + "block",
+		InputBuffer.Action.MELEE:       prefix + "melee",
 	}
 
 

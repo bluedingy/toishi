@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1u7bxnyqfhk6"]
 
 [ext_resource type="Script" uid="uid://uarfktslsmv7" path="res://game/entities/projectile/02c_projectileController.gd" id="1_fwcqr"]
-[ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/player/base_stats.tres" id="2_fwhti"]
+[ext_resource type="Resource" uid="uid://db0sg5rxp42u7" path="res://game/entities/characters/player/base_stats.tres" id="2_fwhti"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_l8n7w"]
 

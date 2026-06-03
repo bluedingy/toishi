@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://di2lybjmmxthi"
-path="res://.godot/imported/cpn_flc_bones.glb-6063eb83fcea3dd9e4d62644bd4a6ca0.scn"
+path="res://.godot/imported/cpn_flc_bones.glb-b269d794a9746cc1163aa4da58c89307.scn"
 
 [deps]
 
-source_file="res://game/entities/player/cpn_flc_bones.glb"
-dest_files=["res://.godot/imported/cpn_flc_bones.glb-6063eb83fcea3dd9e4d62644bd4a6ca0.scn"]
+source_file="res://game/entities/characters/player/cpn_flc_bones.glb"
+dest_files=["res://.godot/imported/cpn_flc_bones.glb-b269d794a9746cc1163aa4da58c89307.scn"]
 
 [params]
 

@@ -19,7 +19,7 @@ enum Action {
 	ATTACK_HOLD,
 	SPECIAL,
 	SPECIAL_HOLD,
-	BLOCK,
+	MELEE,
 	BLOCK_HOLD,
 }
 

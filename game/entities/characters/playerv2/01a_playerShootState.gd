@@ -1,16 +1,11 @@
 class_name PlayerShootState
 extends PlayerState
-#========================= TODO LIST ===================
-# - Add modular 5 punch combo
-# - Add slight movement to the punches
-# - Add animation
 
 var _aerial: bool = false
 
 func enter(prev: PlayerState) -> void:
 	super(prev)
 	_aerial = not is_on_floor()
-	character.velocity.x=0.0
 	character.current_hand_size-=1
 
 func physics_update(delta: float) -> StringName:

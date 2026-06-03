@@ -27,7 +27,7 @@ func physics_update(delta: float) -> StringName:
 	if input.buffer.is_held(InputBuffer.Action.ATTACK_HOLD):
 		return &"AimState"
 
-	if input.buffer.consume(InputBuffer.Action.SPECIAL):
+	if input.buffer.consume(InputBuffer.Action.MELEE):
 		return &"MeleeState"
 
 	if input.buffer.is_held(InputBuffer.Action.SPECIAL_HOLD):
